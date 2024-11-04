@@ -74,12 +74,60 @@ fn main() {
     let s3 = takes_and_gives_back(s2);  // s2はtakes_and_gives_backにムーブされ
                                         // 戻り値もs3にムーブされる
 
+    // 参照と借用
     let s1 = String::from("hello");
 
-    let (s2, len) = calculate_length(s1);
+    let len = calculate_length(&s1);
 
-    //'{}'の長さは、{}です
-    println!("The length of '{}' is {}.", s2, len);
+    // '{}'の長さは、{}です
+    println!("The length of '{}' is {}.", s1, len);
+
+    // 可変な参照
+    let mut s = String::from("hello");
+
+    change(&mut s);
+
+    println!("{}", s);
+
+    let mut s = String::from("hello");
+
+    {
+        let r1 = &mut s;
+
+    } // r1はここでスコープを抜けるので、問題なく新しい参照を作ることができる
+
+    let r2 = &mut s;
+
+    // これはエラーになる
+    // let reference_to_nothing = dangle();
+
+    // スライス
+    let mut s = String::from("hello world");
+
+    let word = first_word(&s); // word will get the value 5
+
+    s.clear(); // this empties the String, making it equal to ""
+    // word still has the value 5 here, but there's no more string that
+    // we could meaningfully use the value 5 with. word is now totally invalid!
+
+    // 文字列スライス
+    // 文字列スライスは、Stringの一部を参照する
+    let s = String::from("hello world");
+
+    let hello = &s[0..5];
+    let world = &s[6..11];
+
+    let s = String::from("hello");
+
+    let slice = &s[0..2];
+    let slice = &s[..2];
+
+    let len = s.len();
+    let slice = &s[3..len];
+    let slice = &s[3..];
+    let slice = &s[0..len];
+    let slice = &s[..];
+
 }
 
 fn takes_ownership(some_string: String) { // some_stringがスコープに入る
@@ -99,8 +147,31 @@ fn takes_and_gives_back(a_string: String) -> String { // a_stringがスコープ
     a_string  // a_stringが返され、呼び出し元関数にムーブされる
 }
 
-fn calculate_length(s: String) -> (String, usize) {
-    let length = s.len(); // len()メソッドは、Stringの長さを返す
+fn calculate_length(s: &String) -> usize { // sはStringへの参照
+    s.len()
+} // ここで、sはスコープを抜けるが、何も特別なことはない
 
-    (s, length)
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
 }
+
+// これはエラーになる
+// fn dangle() -> &String { // dangleはStringへの参照を返す
+//     let s = String::from("hello"); // sは新しいString
+
+//     &s // String sへの参照を返す
+// } // ここでsがスコープを抜け、drop関数が呼ばれる。そのメモリは解放される
+// // 危険！
+
+fn first_word(s: &String) -> usize {
+    let bytes = s.as_bytes(); // バイト列で文字列をエンコード
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
+}
+
