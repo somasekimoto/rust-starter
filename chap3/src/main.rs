@@ -127,5 +127,37 @@ fn main() {
         index, element
     );
 
+    print_labeled_measurement(5, 'h');
 
+
+    // これは式
+    // 末端のx + 1はセミコロンを持っていないため、式です。
+    // この式は、ブロックの最後の式として評価され、その値がyに束縛されます。
+    // もし末端のx + 1にセミコロンがあれば、式ではなく文になり、値を返さないため、yに束縛されません。
+    let y = {
+        let x = 3;
+        x + 1
+    };
+
+    println!("The value of y is: {}", y);
+
+    let x = five();
+    println!("The value of x is: {}", x);
+
+    let x = plus_one(5);
+    println!("The value of x is: {}", x);
+}
+
+
+// Rustではスネークケースを使います。
+fn print_labeled_measurement(value: i32, unit_label: char) {
+    println!("The measurement is: {}{}", value, unit_label);
+}
+
+fn five() -> i32 {
+    5
+}
+
+fn plus_one(x: i32) -> i32 {
+    x + 1
 }
