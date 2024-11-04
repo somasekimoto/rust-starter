@@ -106,7 +106,8 @@ fn main() {
 
     let word = first_word(&s); // word will get the value 5
 
-    s.clear(); // this empties the String, making it equal to ""
+    // エラーになる
+    // s.clear(); // this empties the String, making it equal to ""
     // word still has the value 5 here, but there's no more string that
     // we could meaningfully use the value 5 with. word is now totally invalid!
 
@@ -119,6 +120,7 @@ fn main() {
 
     let s = String::from("hello");
 
+
     let slice = &s[0..2];
     let slice = &s[..2];
 
@@ -127,6 +129,24 @@ fn main() {
     let slice = &s[3..];
     let slice = &s[0..len];
     let slice = &s[..];
+
+    let my_string = String::from("hello world");
+
+    // first_word works on slices of `String`s
+    // first_wordは`String`のスライスに対して機能する
+    let word = first_word(&my_string[..]);
+
+    let my_string_literal = "hello world";
+
+    // first_word works on slices of string literals
+    // first_wordは文字列リテラルのスライスに対して機能する
+    let word = first_word(&my_string_literal[..]);
+
+    // Because string literals *are* string slices already,
+    // this works too, without the slice syntax!
+    // 文字列リテラルは「それ自体すでに文字列スライスなので」、
+    // スライス記法なしでも機能するのだ！
+    let word = first_word(my_string_literal);
 
 }
 
@@ -163,15 +183,14 @@ fn change(some_string: &mut String) {
 // } // ここでsがスコープを抜け、drop関数が呼ばれる。そのメモリは解放される
 // // 危険！
 
-fn first_word(s: &String) -> usize {
-    let bytes = s.as_bytes(); // バイト列で文字列をエンコード
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
 
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
-            return i;
+            return &s[0..i];
         }
     }
 
-    s.len()
+    &s[..]
 }
-
