@@ -40,6 +40,17 @@ fn main() {
     println!("black: {}, {}, {}", black.0, black.1, black.2);
     println!("origin: {}, {}, {}", origin.0, origin.1, origin.2);
 
+    // rectangle
+
+    let width1 = 30;
+    let height1 = 50;
+
+    println!(
+        // 長方形の面積は、{}平方ピクセルです
+        "The area of the rectangle is {} square pixels.",
+        area(width1, height1)
+    );
+
 }
 
 fn build_user(email: String, username: String) -> User {
@@ -49,4 +60,8 @@ fn build_user(email: String, username: String) -> User {
         active: true,
         sign_in_count: 1,
     }
+}
+
+fn area(width: u32, height: u32) -> u32 {
+    width * height
 }
