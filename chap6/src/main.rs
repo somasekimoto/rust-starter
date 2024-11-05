@@ -31,7 +31,14 @@ enum Coin {
     Penny,
     Nickel,
     Dime,
-    Quarter,
+    Quarter(UsState),
+}
+
+#[derive(Debug)] // すぐに州を点検できるように
+enum UsState {
+    Alabama,
+    Alaska,
+    // ... などなど
 }
 
 
@@ -56,7 +63,13 @@ fn main() {
     let value = value_in_cents(coin);
     println!("value: {}", value);
 
+    let coin = Coin::Dime;
+    let value = value_in_cents(coin);
+    println!("value: {}", value);
 
+    let coin = Coin::Quarter(UsState::Alaska);
+    let value = value_in_cents(coin);
+    println!("value: {}", value);
 }
 
 
@@ -68,6 +81,9 @@ fn value_in_cents(coin: Coin) -> u32 {
         },
         Coin::Nickel => 5,
         Coin::Dime => 10,
-        Coin::Quarter => 25,
+        Coin::Quarter(state) => {
+            println!("State quarter from {:?}!", state);
+            25
+        },
     }
 }
