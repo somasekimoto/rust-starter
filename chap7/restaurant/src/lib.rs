@@ -37,6 +37,9 @@ pub fn eat_at_restaurant() {
     // 下の行のコメントを外すとコンパイルできない。食事についてくる
     // 季節のフルーツを知ることも修正することも許されていないので
     // meal.seasonal_fruit = String::from("blueberries");
+
+    let order1 = back_of_house::Appetizer::Soup;
+    let order2 = back_of_house::Appetizer::Salad;
 }
 
 
@@ -56,6 +59,12 @@ mod back_of_house {
                 seasonal_fruit: String::from("peaches"),
             }
         }
+    }
+
+    // enumはpubをつけると列挙子も公開される
+    pub enum Appetizer {
+        Soup,
+        Salad,
     }
 
     fn fix_incorrect_order() {
