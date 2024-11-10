@@ -1,5 +1,6 @@
 mod front_of_house {
-    mod hosting {
+    pub mod hosting {
+        pub 
         fn add_to_waitlist() {}
 
         fn seat_at_table() {}
@@ -12,4 +13,25 @@ mod front_of_house {
 
         fn take_payment() {}
     }
+}
+
+pub fn eat_at_restaurant() {
+    // Absolute path
+    // 絶対パス
+    crate::front_of_house::hosting::add_to_waitlist();
+
+    // Relative path
+    // 相対パス
+    front_of_house::hosting::add_to_waitlist();
+}
+
+fn serve_order() {}
+
+mod back_of_house {
+    fn fix_incorrect_order() {
+        cook_order();
+        super::serve_order();
+    }
+
+    fn cook_order() {}
 }
