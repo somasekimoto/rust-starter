@@ -98,6 +98,24 @@ fn main() {
 
     let s = format!("{}-{}-{}", s1, s2, s3);
 
+    let len = String::from("Hola").len();
+    println!("len: {}", len);
 
+    let len = String::from("Здравствуйте").len();
+    println!("len: {}", len);
+
+    let hello = "Здравствуйте";
+    // let answer = &hello[0];
+    // 0..1の範囲を指定したら、エラーになる。なぜなら、文字列スライスはバイト単位でなければならない
+    let answer = &hello[0..4];
+    println!("answer: {}", answer);
+
+    for c in "नमस्ते".chars() {
+        println!("{}", c);
+    }
+
+    for b in "नमस्ते".bytes() {
+        println!("{}", b);
+    }
 
 }
