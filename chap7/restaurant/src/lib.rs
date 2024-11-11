@@ -47,15 +47,16 @@ pub fn eat_at_restaurant() {
     hosting::add_to_waitlist();
     hosting::add_to_waitlist();
 
-    use std::fmt;
-    use std::io;
+    use std::fmt::Result;
+    use std::io::Result as IoResult;
 
-    fn function1() -> fmt::Result {
+    fn function1() -> Result {
         return Ok(());
     }
 
-    fn function2() -> io::Result<()> {
+    fn function2() -> IoResult<()> {
         return Ok(());
+
     }
 
 }
