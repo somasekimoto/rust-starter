@@ -185,4 +185,40 @@ fn main() {
     }
 
     println!("{:?}", map);
+
+    let mut v = vec![23, 45, 67, 89, 12, 34, 56, 78, 90, 21, 90];
+    let mean = v.iter().sum::<i32>() / v.len() as i32;
+    println!("mean: {}", mean);
+
+    let median = {
+        v.sort();
+        let mid = v.len() / 2;
+        if v.len() % 2 == 0 {
+            (v[mid - 1] + v[mid]) / 2
+        } else {
+            v[mid]
+        }
+    };
+    println!("median: {}", median);
+
+    let mode = {
+        let mut map = HashMap::new();
+        for &i in &v {
+            let count = map.entry(i).or_insert(0);
+            *count += 1;
+        }
+        let mut max = 0;
+        let mut mode = 0;
+        for (key, value) in map {
+            if value > max {
+                max = value;
+                mode = key;
+            }
+        }
+        mode
+    };
+    println!("mode: {}", mode);
+
+
+
 }
