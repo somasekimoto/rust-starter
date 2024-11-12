@@ -145,12 +145,15 @@ fn main() {
 
     println!("1 new tweet: {}", tweet.summarize());
 
-    let string1 = String::from("abcd");
-    let string2 = "xyz";
+    let string1 = String::from("long string is long");
+    // （訳注：この言葉自体に深い意味はない。下の"xyz"より長いということだけが重要）
 
-    let result = longest(string1.as_str(), string2);
-    // 最長の文字列は、{}です
-    println!("The longest string is {}", result);
+    {
+        let string2 = String::from("xyz");
+        let result = longest(string1.as_str(), string2.as_str());
+        // 一番長い文字列は{}
+        println!("The longest string is {}", result);
+    }
 
 }
 
