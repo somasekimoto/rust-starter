@@ -102,22 +102,6 @@ fn main() {
 
     println!("1 new tweet: {}", tweet.summarize());
 
-    // let article = NewsArticle {
-    //     // ペンギンチームがスタンレーカップチャンピオンシップを勝ち取る！
-    //     headline: String::from("Penguins win the Stanley Cup Championship!"),
-    //     // アメリカ、ペンシルベニア州、ピッツバーグ
-    //     location: String::from("Pittsburgh, PA, USA"),
-    //     // アイスバーグ
-    //     author: String::from("Iceburgh"),
-    //     // ピッツバーグ・ペンギンが再度NHL(National Hockey League)で最強のホッケーチームになった
-    //     content: String::from(
-    //         "The Pittsburgh Penguins once again are the best \
-    //          hockey team in the NHL.",
-    //     ),
-    // };
-
-    // println!("New article available! {}", article.summarize());
-
     let tweet = Tweet {
         username: String::from("horse_ebooks"),
         content: String::from(
@@ -129,4 +113,43 @@ fn main() {
 
     println!("1 new tweet: {}", tweet.summarize());
 
+}
+
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    }
+
+    // 以下はエラー
+    // if switch {
+    //     NewsArticle {
+    //         headline: String::from(
+    //             "Penguins win the Stanley Cup Championship!",
+    //         ),
+    //         location: String::from("Pittsburgh, PA, USA"),
+    //         author: String::from("Iceburgh"),
+    //         content: String::from(
+    //             "The Pittsburgh Penguins once again are the best \
+    //              hockey team in the NHL.",
+    //         ),
+    //     }
+    // } else {
+    //     Tweet {
+    //         username: String::from("horse_ebooks"),
+    //         content: String::from(
+    //             "of course, as you probably already know, people",
+    //         ),
+    //         reply: false,
+    //         retweet: false,
+    //     }
+    // }
 }
