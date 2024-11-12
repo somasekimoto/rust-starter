@@ -93,6 +93,14 @@ impl<T: Display + PartialOrd> Pair<T> {
     }
 }
 
+fn longest(x: &str, y: &str) -> &str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
 fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
@@ -136,6 +144,13 @@ fn main() {
     };
 
     println!("1 new tweet: {}", tweet.summarize());
+
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
+
+    let result = longest(string1.as_str(), string2);
+    // 最長の文字列は、{}です
+    println!("The longest string is {}", result);
 
 }
 
