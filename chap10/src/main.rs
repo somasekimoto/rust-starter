@@ -101,6 +101,10 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     }
 }
 
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
 fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
@@ -154,6 +158,14 @@ fn main() {
         // 一番長い文字列は{}
         println!("The longest string is {}", result);
     }
+
+    // 僕をイシュマエルとお呼び。何年か前・・・
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    // "'.'が見つかりませんでした"
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    let i = ImportantExcerpt {
+        part: first_sentence,
+    };
 
 }
 
