@@ -24,6 +24,16 @@ impl<T, U> Point<T, U> {
     }
 }
 
+enum Option_i32 {
+    Some(i32),
+    None,
+}
+
+enum Option_f64 {
+    Some(f64),
+    None,
+}
+
 fn main() {
     // let number_list = vec![34, 50, 25, 100, 65];
 
@@ -41,4 +51,7 @@ fn main() {
     let p3 = p1.mixup(p2);
 
     println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
+
+    let integer = Option_i32::Some(5);
+    let float = Option_f64::Some(5.0);
 }
