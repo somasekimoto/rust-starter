@@ -105,6 +105,23 @@ struct ImportantExcerpt<'a> {
     part: &'a str,
 }
 
+fn longest_with_an_announcement<'a, T>(
+    x: &'a str,
+    y: &'a str,
+    ann: T,
+) -> &'a str
+where
+    T: Display,
+{
+    //       "アナウンス！ {}"
+    println!("Announcement! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
 fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
@@ -166,6 +183,14 @@ fn main() {
     let i = ImportantExcerpt {
         part: first_sentence,
     };
+
+    let s: &'static str = "I have a static lifetime.";
+    println!("s: {}", s);
+
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
+
+    let result = longest_with_an_announcement(string1.as_str(), string2, "Today is someone's birthday!");
 
 }
 
