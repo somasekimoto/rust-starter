@@ -14,6 +14,10 @@ pub fn add_two(a: i32) -> i32 {
     a + 2
 }
 
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 pub struct Guess {
     value: i32,
 }
@@ -113,5 +117,10 @@ mod tests {
     fn expensive_test() {
         // 実行に1時間かかるコード
         // code that takes an hour to run
+    }
+
+    #[test]
+    fn internal() {
+        assert_eq!(4, internal_adder(2, 2));
     }
 }
