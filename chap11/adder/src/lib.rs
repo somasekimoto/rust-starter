@@ -92,4 +92,26 @@ mod tests {
     fn greater_than_100() {
         Guess::new(200);
     }
+
+    #[test]
+    fn add_two_and_two() {
+        assert_eq!(4, add_two(2));
+    }
+
+    #[test]
+    fn add_three_and_two() {
+        assert_eq!(5, add_two(3));
+    }
+
+    #[test]
+    fn one_hundred() {
+        assert_eq!(102, add_two(100));
+    }
+
+    #[test]
+    #[ignore]
+    fn expensive_test() {
+        // 実行に1時間かかるコード
+        // code that takes an hour to run
+    }
 }
